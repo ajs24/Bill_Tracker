@@ -1,4 +1,5 @@
 import sqlite3
+import datetime
 
 # Establishing a connection to the database (creates a new database if it doesn't exist)
 conn = sqlite3.connect("bill_tracker.db")
@@ -60,12 +61,21 @@ def calculate_total_owed():
     return total_owed if total_owed else 0.0
 
 def view_unpaid_bills():
+    #Modified so that unpaid bills only appear if they are owed within 30 days.
+
+    # Step 1: Get the current date
+    current_date = datetime.date.today()
+
+    # Step 2: Calculate the date that is 30 days ahead of the current date
+    thirty_days_ahead = current_date + datetime.timedelta(days=30)
+
+    # Step 3: Fetch unpaid bills due within the next 30 days (inclusive)
     cursor.execute("""
-        SELECT * FROM bills WHERE is_paid = 0
-    """)
+        SELECT * FROM bills WHERE is_paid = 0 AND due_date <= ?
+    """, (thirty_days_ahead,))
     unpaid_bills = cursor.fetchall()
 
-    # Calculate the total owed
+    # Step 4: Calculate the total owed
     total_owed = calculate_total_owed()
 
     return unpaid_bills, total_owed
