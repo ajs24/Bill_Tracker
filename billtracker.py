@@ -72,7 +72,7 @@ def view_unpaid_bills():
 
 def update_due_date(bill_id, due_date):
     cursor.execute("""
-        UPDATE bills SET due_date = ? WHERE id = ?
+        UPDATE bills SET due_date = ?, is_paid = 0 WHERE id = ?
     """, (due_date, bill_id))
     conn.commit()
 
