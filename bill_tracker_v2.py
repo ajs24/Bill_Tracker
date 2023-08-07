@@ -102,9 +102,9 @@ def main():
             bills = view_bills()
             total_owed = calculate_total_owed()
             sorted_bills = sorted(bills, key=lambda x: (not x[4], x[3]))  # Sort by not is_paid (False first) and then due_date (ascending)
-            print("---------------------------------------------------------------------------------------")
-            print("| \033[1mID\033[0m           | \033[1mCompany\033[0m         | \033[1mAmount\033[0m        | \033[1mDue Date\033[0m       | \033[1mPaid Status\033[0m       |")
-            print("---------------------------------------------------------------------------------------")
+            print("------------------------------------------------------------------------------------------")
+            print("| \033[1mID\033[0m              | \033[1mCompany\033[0m         | \033[1mAmount\033[0m          | \033[1mDue Date\033[0m       | \033[1mPaid Status\033[0m     |")
+            print("------------------------------------------------------------------------------------------")
             for bill in sorted_bills:
                 amount = f"\033[32m${bill[2]:.2f}\033[0m" if bill[4] else f"\033[31m${bill[2]:.2f}\033[0m"  # Green if paid, red if unpaid
                 paid_status = "\033[32mYes\033[0m" if bill[4] else "\033[31mNo\033[0m"  # Green for "Yes", red for "No"
@@ -118,14 +118,14 @@ def main():
                     due_date = "\033[32m" + due_date + "\033[0m" # Green color for due date
                 else: #If we're late on our payment
                     due_date = "\033[31m" + due_date + "\033[0m" #Red color for due date
-                print(f"| {bill[0]:<13}| {bill[1]:<15} | {amount:<22} | {due_date:<24}| {paid_status:<15}            |")
-            print("---------------------------------------------------------------------------------------")
-            print(f"                            \033[4mTotal Amount Owed: ${total_owed:.2f}\033[0m")
+                print(f"| {bill[0]:<16}| {bill[1]:<15} | {amount:<24} | {due_date:<24}| {paid_status:<13}            |")
+            print("------------------------------------------------------------------------------------------")
+            print(f"                               \033[4mTotal Amount Owed: ${total_owed:.2f}\033[0m")
         elif choice == "3":
             bills = view_bills()
-            print("---------------------------------------------------------------------------------------")
-            print("| \033[1mID\033[0m           | \033[1mCompany\033[0m         | \033[1mAmount\033[0m        | \033[1mDue Date\033[0m       | \033[1mPaid Status\033[0m       |")
-            print("---------------------------------------------------------------------------------------")
+            print("------------------------------------------------------------------------------------------")
+            print("| \033[1mID\033[0m              | \033[1mCompany\033[0m         | \033[1mAmount\033[0m          | \033[1mDue Date\033[0m       | \033[1mPaid Status\033[0m     |")
+            print("------------------------------------------------------------------------------------------")
             for bill in bills:
                 amount = f"\033[32m${bill[2]:.2f}\033[0m" if bill[4] else f"\033[31m${bill[2]:.2f}\033[0m"  # Green if paid, red if unpaid
                 paid_status = "\033[32mYes\033[0m" if bill[4] else "\033[31mNo\033[0m"  # Green for "Yes", red for "No"
@@ -139,20 +139,20 @@ def main():
                     due_date = "\033[32m" + due_date + "\033[0m" # Green color for due date
                 else: #If we're late on our payment
                     due_date = "\033[31m" + due_date + "\033[0m" #Red color for due date
-                print(f"| {bill[0]:<13}| {bill[1]:<15} | {amount:<22} | {due_date:<24}| {paid_status:<15}            |")
-            print("---------------------------------------------------------------------------------------")
+                print(f"| {bill[0]:<16}| {bill[1]:<15} | {amount:<24} | {due_date:<24}| {paid_status:<13}            |")
+            print("------------------------------------------------------------------------------------------")
             selected_id = input("\n\033[47m\033[30mPlease enter a bill ID:\033[0m ")
             
             if selected_id == '0':
-                break
+                continue
             
             try:
                 selected_id = int(selected_id)
                 bill = next((b for b in bills if b[0] == selected_id), None)
                 if bill:
-                    print("\n---------------------------------------------------------------------------------------")
-                    print("| \033[1mID\033[0m           | \033[1mCompany\033[0m         | \033[1mAmount\033[0m        | \033[1mDue Date\033[0m       | \033[1mPaid Status\033[0m       |")
-                    print("---------------------------------------------------------------------------------------")
+                    print("------------------------------------------------------------------------------------------")
+                    print("| \033[1mID\033[0m              | \033[1mCompany\033[0m         | \033[1mAmount\033[0m          | \033[1mDue Date\033[0m       | \033[1mPaid Status\033[0m     |")
+                    print("------------------------------------------------------------------------------------------")
                     amount = f"\033[32m${bill[2]:.2f}\033[0m" if bill[4] else f"\033[31m${bill[2]:.2f}\033[0m"  # Green if paid, red if unpaid
                     paid_status = "\033[32mYes\033[0m" if bill[4] else "\033[31mNo\033[0m"  # Green for "Yes", red for "No"
                     due_date = bill[3]
@@ -165,8 +165,8 @@ def main():
                         due_date = "\033[32m" + due_date + "\033[0m" # Green color for due date
                     else: #If we're late on our payment
                         due_date = "\033[31m" + due_date + "\033[0m" #Red color for due date
-                    print(f"| {bill[0]:<13}| {bill[1]:<15} | {amount:<22} | {due_date:<24}| {paid_status:<15}            |")
-                    print("---------------------------------------------------------------------------------------")
+                    print(f"| {bill[0]:<16}| {bill[1]:<15} | {amount:<24} | {due_date:<24}| {paid_status:<13}            |")
+                    print("------------------------------------------------------------------------------------------")
 
                     while True:
                         print("\nSelect an action:\n")
@@ -225,9 +225,9 @@ def main():
                 else:
                     print("Bill ID not found. Please enter a valid bill ID.")
                 if bill:
-                    print("---------------------------------------------------------------------------------------")
-                    print("| \033[1mID\033[0m           | \033[1mCompany\033[0m         | \033[1mAmount\033[0m        | \033[1mDue Date\033[0m       | \033[1mPaid Status\033[0m       |")
-                    print("---------------------------------------------------------------------------------------")
+                    print("------------------------------------------------------------------------------------------")
+                    print("| \033[1mID\033[0m              | \033[1mCompany\033[0m         | \033[1mAmount\033[0m          | \033[1mDue Date\033[0m       | \033[1mPaid Status\033[0m     |")
+                    print("------------------------------------------------------------------------------------------")
                     amount = f"\033[32m${bill[2]:.2f}\033[0m" if bill[4] else f"\033[31m${bill[2]:.2f}\033[0m"  # Green if paid, red if unpaid
                     paid_status = "\033[32mYes\033[0m" if bill[4] else "\033[31mNo\033[0m"  # Green for "Yes", red for "No"
                     due_date = bill[3]
@@ -240,8 +240,8 @@ def main():
                         due_date = "\033[32m" + due_date + "\033[0m" # Green color for due date
                     else: #If we're late on our payment
                         due_date = "\033[31m" + due_date + "\033[0m" #Red color for due date
-                    print(f"| {bill[0]:<13}| {bill[1]:<15} | {amount:<22} | {due_date:<24}| {paid_status:<15}            |")
-                    print("---------------------------------------------------------------------------------------")
+                    print(f"| {bill[0]:<16}| {bill[1]:<15} | {amount:<24} | {due_date:<24}| {paid_status:<13}            |")
+                    print("------------------------------------------------------------------------------------------")
             except ValueError:
                 print("\nInvalid input.")
         elif choice == "4":
